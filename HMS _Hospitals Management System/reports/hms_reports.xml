@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="hms_patient_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <style>
+                    .custom-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    .custom-table th, .custom-table td {
+                        padding: 8px;
+                        text-align: left;
+                        border: 1px solid #ddd;
+                    }
+                    .custom-table th {
+                        background-color: #343a40; 
+                        color: white;
+                    }
+                    .custom-table tr:nth-child(even) {
+                        background-color: #f2f2f2; 
+                    }
+                </style>
+                <div class="page">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>first name</th>
+                                <th>last name</th>
+                                <th>birth date</th>
+                                <th>age</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="o">
+                                <tr>
+                                    <td><span t-field="o.first_name"/></td>
+                                    <td><span t-field="o.last_name"/></td>
+                                    <td><span t-field="o.birth_date"/></td>
+                                    <td><span t-field="o.age"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="hms_patient_report" model="ir.actions.report">
+        <field name="name">patient Report</field>
+        <field name="model">hms.patient</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_hms_patient"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">hms.hms_patient_template</field>
+    </record>
+
+</odoo>
